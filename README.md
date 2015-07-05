@@ -3,17 +3,17 @@
 <img src="http://i.imgur.com/DHHroH1.png" alt="Starfish logo" height="400">
 
 ##Important
-Before moving forward with *any* coding, we should decide on a basic set of goals and a tech stack. If you are interested in the project and want to see it move forward, Watch and/or Star this repository. To get involved, open a new issue at GitHub with your feedback or suggestions. 
+Before moving forward, we should decide on a basic set of goals and a tech stack. If you are interested in the project and want to see it move forward, Watch and/or Star this repository. To get involved, open a new issue at GitHub with your feedback or suggestions. 
 
 ##Working title
 Starfish
 
 ##Summary
-The goal of this project is to provide a decentralized alternative to online communities like reddit. As we can see from the current changes to Reddit, once the owners begin to control the content posted, censorship can move quickly from banning harassment to removing any content that looks bad to advertisers, or embarrasses the CEO. 
+The goal of this project is to provide a decentralized alternative to online communities like reddit. As we can see, once website owners begin to control the content posted, censorship can move quickly from banning harassment to removing anything that looks bad to advertisers, or embarrasses the CEO. 
 
-Over time the interests of the website owners and their users begin to diverge. Once  users have been lured in and locked in, advertisers become the customers, and users (including their content) become the product. Sooner or later, any activity or content that doesn't appeal to advertisers will be marginalized or banned. 
+Over time the interests of the website owners and their users begin to diverge. Once users have been lured in and locked in, advertisers become the customers, and users (including their content) become the product. Sooner or later, any activity or content that doesn't appeal to advertisers will be marginalized or banned.
 
-This problem is not unique to reddit. A version of it happened to Digg, and, should some individually owned community site replace reddit, it will eventually happen to that website as well. The solution is to build a decentralized community that's just as easy to access and use as reddit, but where all content is owned and controlled by the individual users, and where anyone who wants can host a node on the system, or contribute to the underlying software.
+This problem is not unique to reddit. A version of this happened to Digg, and, should some other individually owned community site replace reddit, it will eventually happen to that website as well. The solution is to build a decentralized community that's just as easy to access and use as reddit, but where all content is owned and controlled by the individual users, and where anyone who wants can host a node on the system, or contribute to the underlying software.
 
 Think of it like reddit meets BitTorrent, or "Doge for Discussion".<sup>[1](#footnotes)</sup>
 
