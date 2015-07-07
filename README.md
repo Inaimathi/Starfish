@@ -40,8 +40,14 @@ Think of it like reddit meets BitTorrent, or "Doge for Discussion".<sup>[1](#foo
 
 ##Additional thoughts and random ideas
 
-**Karma grows up and becomes a currency unto itself.** All community systems use some version of karma to reward good behavior. What if karma in this system became a full-fledged currency, one that could be transferred or exchanged for perks like the ability to create a new community? **Note**: Getting this right could be **extremely tricky**. 
+**Karma grows up and becomes a currency unto itself.**  
+All community systems use some version of karma to reward good behavior. What if karma in this system became a full-fledged currency, one that could be transferred or exchanged for perks like the ability to create a new community? **Note**: Getting this right could be **extremely tricky**. 
 
+**Karma can be computed in many different ways.** 
+Imagine that individual communities (or even users) can pick their own ratings mechanism. In this decentalized system, everyone would get to see the upvotes of everyone else (for public communities). A user convert that voting information into a simple ups vs downs points system, or filter content according to a more sophisticated system that used a page-rank like algorithm, weighting the upvotes of high karma individuals more than low karma individuals.
+
+**The back end should lock in a protocol, not a language.** 
+A natural choice for the JS driven front end might be Node, but there's no reason not to consider Erlang, Go, Nim, or others. So long as the back end is able to persist content and handle requests, there could be multiple implementations of the server side code.
 
 <a name="footnotes"></a>
 ##Footnotes
