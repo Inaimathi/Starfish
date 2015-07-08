@@ -1,31 +1,36 @@
 Star = {}
 
-Star.newPost = function (title, body, tags) {
-    var puff = EB.Puff.simpleBuild("starfish.v0.post", body, {title: title, tags: tags})
+Star.G = Dagoba.graph()
+
+Star.exhale = function (type, body, props) {
+    var puff = EB.Puff.simpleBuild("starfish.v0." + type, body, props)
+    var vertex = { _id: puff.sig, type: type, version: 0 }
+    Star.G.addVertex(vertex)
+    if (props.target) {
+	Star.G.addEdge({ _in: props.target, _out: puff.sig, _label: type })
+    }
     EB.Data.addPuffToSystem(puff)
+    return puff.sig
+}
+
+Star.newPost = function (title, body, tags) {
+    return Star.exhale("post", body, {title: title, tags: tags})
 }
 
 Star.newLink = function (title, link, tags) {
-    var puff = EB.Puff.simpleBuild("starfish.v0.link", link, {title: title, tags: tags})
-    EB.Data.addPuffToSystem(puff)
+    return Star.exhale("link", link, {title: title, tags: tags})
 }
 
-Star.commentOn = function (postOrComment, comment) {
-    var puff = EB.Puff.simpleBuild("starfish.v0.comment", comment)
-    puff.previous = postOrComment.sig
-    EB.Data.addPuffToSystem(puff)
+Star.commentOn = function (sig, comment) {
+    return Star.exhale("comment", comment, {target: sig})
 }
 
-Star.up = function (postOrComment) {
-    var puff = EB.Puff.simpleBuild("starfish.vote", "^");
-    puff.previous = postOrComment.sig
-    EB.Data.addPuffToSystem(puff)
+Star.up = function (sig) {
+    Star.exhale("vote", "^", {target: sig})
 }
 
-Star.down = function (postOrComment) {
-    var puff = EB.Puff.simpleBuild("starfish.vote", "v");
-    puff.previous = postOrComment.sig
-    EB.Data.addPuffToSystem(puff)
+Star.down = function (sig) {
+    Star.exhale("vote", "v", {target: sig})
 }
 
 Star.logout = function (name) {
