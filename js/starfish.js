@@ -1,5 +1,10 @@
 Star = {}
 
+Star.V = 0
+Star.stripV = function (str) {
+  return str.replace("starfish.v0.", "")
+}
+
 Star.G = Dagoba.graph()
 Star.postsAndLinks = []
 

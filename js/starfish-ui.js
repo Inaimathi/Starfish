@@ -1,9 +1,11 @@
 Star.UI = {}
 
-Star.UI.into = function ($elem, elemType, cssClass) {
+Star.UI.into = function ($elem, elemType, cssClasses) {
   var el = document.createElement(elemType)
-  if (cssClass) {
-    el.classList.add(cssClass)
+  if (cssClasses) {
+    cssClasses.map(function (cls) {
+      el.classList.add(cls)
+    })
   }
   $elem.append(el)
   return $(el)
@@ -25,14 +27,20 @@ Star.UI.renderPosts = function ($elem, postIds) {
   $elem.empty()
   postIds.map(function (id) {
     var puff = Star.G.v(id).run()[0].puff
-    Star.UI.renderPostItem(Star.UI.into($elem, "div", "post"), puff)
+    Star.UI.renderPostItem(Star.UI.into($elem, "div", ["post"]), puff)
   })
 }
 
 Star.UI.renderPostItem = function ($elem, puff) {
-  var voteCount = Star.G.v(puff.sig).in('downvote', 'upvote').run().length
+  var ups = Star.G.v(puff.sig).in('upvote').run()
+  var downs = Star.G.v(puff.sig).in('downvote').run()
   var comments = Star.G.v(puff.sig).in('comment').run()
-  $elem.append("<span>" + puff.payload.title + " -- Votes " + voteCount + ", Mentions " + comments.length + "</div>")
+  Star.UI.into($elem, "button").text("+").click(function () {
+    console.log("Expand for ", puff, "clicked!")
+  })
+  $elem.append("<span class=\"votes\"><span class=\"up\">" + ups.length + "</span> | <span class=\"down\">" + downs.length + "</span></span>")
+  $elem.append("<span class=\"mentions\">" + comments.length + "</span>")
+  $elem.append("<span class=\"title\">" + puff.payload.title + "</span>")
 }
 
 Star.UI.renderPostComments = function ($elem, id) {
