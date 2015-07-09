@@ -12,11 +12,8 @@ Star.plot = function (type, puff) {
   var id = Star.isVote(type) ? puff.username + type + puff.payload.target : puff.sig
 
   if (!Star.G.findVertexById(id)) {
-    console.log("UNIQUE: ", id)
     var vertex = { _id: id, puff: puff }
     Star.G.addVertex(vertex)
-  } else {
-    console.log("DUPE: ", id)
   }
 
   if (type == "post" || type == "link") {

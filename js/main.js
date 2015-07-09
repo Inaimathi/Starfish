@@ -12,6 +12,7 @@ function test () {
   var c4 = Star.commentOn(c3, "Check check")
   var c5 = Star.commentOn(c4, "One. Two.")
   var c6 = Star.commentOn(c5, "Check.")
+  var c7 = Star.commentOn(a, "This is a second comment.")
 
   Star.up(a)
   Star.up(a)
