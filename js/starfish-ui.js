@@ -12,15 +12,15 @@ Star.UI.into = function ($elem, elemType, cssClasses) {
 }
 
 Star.UI.clear = function () {
-  console.log("Clearing UI...")
+  console.log("TODO: Clearing UI...")
 }
 
 Star.UI.showUser = function () {
-  console.log("Showing user...")
+  console.log("TODO: Showing user...")
 }
 
 Star.UI.showError = function (message) {
-  console.log("ERROR", message)
+  console.log("TODO: ERROR", message)
 }
 
 Star.UI.renderPosts = function ($elem, postIds) {
@@ -81,16 +81,6 @@ Star.UI.renderCommentList = function ($elem, comments) {
     Star.UI.renderComment(Star.UI.into($ul, "li"), c)
   })
 }
-
-// Star.UI.renderPostComments = function ($elem, id) {
-//   $elem.empty()
-//   var q = Star.G.v(id).in('comment').take(1)
-//   var res = q.run()
-//   while (res) {
-//     Star.UI.renderComment(Star.UI.into($elem, "div"), res[0].puff)
-//     res = q.run()
-//   }
-// }
 
 Star.UI.renderComment = function ($elem, puff) {
   $elem.empty()
