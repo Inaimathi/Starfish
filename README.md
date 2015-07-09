@@ -34,11 +34,11 @@ Think of it like reddit meets BitTorrent, or "Doge for Discussion".<sup>[1](#foo
 
 **Data structure:** GraphDB. This allows for fast traversal of the relationships between comments, and opens the door to multi-threaded commenting (multiple parents as well as multiple children).
 
- - Agreed. Using `Dagoba`. Assuming tree structure for the first cut, but DAG shouldn't be hard to put together (we should be careful about cycles. Either disallow them with high confidence, or handle them gracefully. Definitely don't get into the situation where the UI tanks because some jackass managed to predict his next `puff.sig`)
+ - Agreed. Using `Dagoba`. Assuming tree structure for the first cut, but DAG shouldn't be hard to put together (we should be careful about cycles. Either disallow them with high confidence, or handle them gracefully. Definitely don't get into the situation where the UI tanks because some jackass managed to predict his next `puff.sig`) *-Inaimathi*
 
-**Front end:** ReactJS. This is an open source project from Facebook that breaks the rendering of pages into components. React uses a virtual DOM and does "diffing" to only update the parts of the page that have changed. This makes it fast. One-way data flow and component state make it ideal for decentralized development where individuals can work on a part of the view without worrying about the rest of the page.
+**Front end:** [ReactJS](http://facebook.github.io/react/). This is an open source project from Facebook that breaks the rendering of pages into components. React uses a virtual DOM and does "diffing" to only update the parts of the page that have changed. This makes it fast. One-way data flow and component state make it ideal for decentralized development where individuals can work on a part of the view without worrying about the rest of the page.
 
- - Writing the first cut manually. Eventually, `starfish-ui.js` should be replaced with whatever DOM-manipulating framework gets chosen. Never worked with ReactJS, but wouldn't mind picking it up when I get some more time.
+ - Writing the first cut manually. Eventually, `starfish-ui.js` should be replaced with whatever DOM-manipulating framework gets chosen. Never worked with [ReactJS](http://facebook.github.io/react/), but wouldn't mind picking it up when I get some more time. *-Inaimathi*
 
 **Data storage and sharing:** Individual posts and messages would be stored in "puff" format, an open standard that's part of the [EveryBit.js](https://github.com/EveryBit-com/everybit.js) library. Puffs are immutable, signed, and can be encrypted on the client for private communication. Because puffs are static, files can be hosted anywhere (i.e. a CDN) and passed around in P2P networks without issues of concurrency or risk of corruption (this is detectable using the signature). 
 
@@ -46,7 +46,7 @@ Think of it like reddit meets BitTorrent, or "Doge for Discussion".<sup>[1](#foo
 
 **Karma grows up and becomes a currency unto itself.** All community systems use some version of karma to reward good behavior. What if karma in this system became a full-fledged currency, one that could be transferred or exchanged for perks like the ability to create a new community? **Note**: Getting this right could be **extremely tricky**.
 
- - Careful here. "Karma" is useful pretty much to the extent that it *isn't* transferable, because once it *is*, you'll likely see the same imbalances you see in government-backed economies (rich-get-richer, inheritances, and so forth). Unless you believe that the richest people in the world are the most trustworthy, this doesn't sound like the right way to go. Limited transferability doesn't seem to have hurt `stackoverflow`, but it seems like it might be a gameable system in the long term.
+ - Careful here. "Karma" is useful pretty much to the extent that it *isn't* transferable, because once it *is*, you'll likely see the same imbalances you see in government-backed economies (rich-get-richer, inheritances, and so forth). Unless you believe that the richest people in the world are the most trustworthy, this doesn't sound like the right way to go. Limited transferability doesn't seem to have hurt `stackoverflow`, but it seems like it might be a gameable system in the long term. *-Inaimathi*
 
 <a name="footnotes"></a>
 ##Footnotes
