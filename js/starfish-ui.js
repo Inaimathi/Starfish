@@ -41,7 +41,7 @@ Star.UI.renderPostItem = function ($elem, puff) {
   if (comments.length > 0) {
     Star.UI.renderCommentTree(Star.UI.into($elem, "span", ["comments-tree"]), 
 			      comments.map(function (c) { return c.puff }),
-			      2)
+			      5)
   }
 }
 
@@ -67,7 +67,10 @@ Star.UI.renderTreeComment = function ($elem, puff, depth) {
       var $more = Star.UI.into($elem, "button", ["more-button"])
       $more.text("Load more...")
       $more.click(function () {
-	console.log("TODO: show more tree")
+	$more.remove()
+	Star.UI.renderCommentTree(Star.UI.into($elem, "ul"),
+				  coms.map(function(c) { return c.puff }),
+				  10)
       })
     }
   }
