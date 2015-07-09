@@ -1,25 +1,39 @@
 Star = {}
 
 Star.V = 0
-Star.stripV = function (str) {
-  return str.replace("starfish.v0.", "")
+Star.isVote = function (tp) {
+  return tp == "upvote" || tp == "downvote"
 }
 
 Star.G = Dagoba.graph()
 Star.postsAndLinks = []
 
-Star.exhale = function (type, body, props) {
-  var puff = EB.Puff.simpleBuild("starfish.v0." + type, body, props)
-  var vertex = { _id: puff.sig, type: type, puff: puff, version: 0 }
-  Star.G.addVertex(vertex)
+Star.plot = function (type, puff) {
+  var id = Star.isVote(type) ? puff.username + type + puff.payload.target : puff.sig
+
+  if (!Star.G.findVertexById(id)) {
+    console.log("UNIQUE: ", id)
+    var vertex = { _id: id, puff: puff }
+    Star.G.addVertex(vertex)
+  } else {
+    console.log("DUPE: ", id)
+  }
+
   if (type == "post" || type == "link") {
-    Star.postsAndLinks.push(puff.sig)
+    Star.postsAndLinks.push(id)
   }
-  if (props.target) {
-    Star.G.addEdge({ _in: props.target, _out: puff.sig, _label: type })
+
+  if (puff.payload.target) {
+    Star.G.addEdge({ _in: puff.payload.target, _out: id, _label: type })
   }
+  return id
+}
+
+Star.exhale = function (type, body, props) {
+  var puff = EB.Puff.simpleBuild(type, body, props)
+  var vertex = { _id: puff.sig, type: type, puff: puff }
   EB.Data.addPuffToSystem(puff)
-  return puff.sig
+  return Star.plot(type, puff)
 }
 
 Star.newPost = function (title, body, tags) {

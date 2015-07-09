@@ -26,7 +26,7 @@ Star.UI.showError = function (message) {
 Star.UI.renderPosts = function ($elem, postIds) {
   $elem.empty()
   postIds.map(function (id) {
-    var puff = Star.G.v(id).run()[0].puff
+    var puff = Star.G.findVertexById(id).puff
     Star.UI.renderPostItem(Star.UI.into($elem, "div", ["post"]), puff)
   })
 }
