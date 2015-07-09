@@ -65,7 +65,7 @@ Star.UI.renderTreeComment = function ($elem, puff, depth) {
 				depth)
     } else {
       var $more = Star.UI.into($elem, "button", ["more-button"])
-      $more.text("Load more...")
+      $more.text("Show responses...")
       $more.click(function () {
 	$more.remove()
 	Star.UI.renderCommentTree(Star.UI.into($elem, "ul"),
