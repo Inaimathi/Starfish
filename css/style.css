@@ -5,6 +5,11 @@
     background-repeat: no-repeat;
 }
 
+#starfish .row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .page-title {
     width: 100%;
     text-align: center;
@@ -14,20 +19,42 @@
     width: 100%;
     max-width: 600px;
     margin: auto; 
-    background-color: rgba(255,255,255,0.9)
+    background-color: rgba(255,255,255,0.9);
+    padding: 20px;
 }
-.posts-list .post {}
+.posts-list .post {
+    background-color: rgba(245,245,245,0.8);
+    margin-bottom: 10px;
+    border-radius: 10px 10px 0px 10px;
+}
 
-.post {}
-.post title {}
-.post mentions {}
+.post { }
+.post .row { padding: 5px; }
+.post .top.row {
+    background-color: #ddd;
+    border-radius: 10px 10px 0px 0px;
+    font-weight: bold;
+}
+.post .title {}
+.post .mentions {}
 .post .votes {}
 .post .votes .up {}
 .post .votes .down {}
-.post .content {}
+.post .content {
+    display: block;
+    padding: 0px 15px;
+}
+.post .row.loud {
+    padding: 10px 5px;
+    border-bottom: 2px solid #ccc;
+}
 .post .comments-tree {}
 
 .comments-tree {}
+.comments-tree ul {
+    margin: 0px;
+    padding-left: 15px;
+}
 .comments-tree .comment {}
 
 .comment {}

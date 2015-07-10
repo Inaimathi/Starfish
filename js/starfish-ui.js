@@ -35,20 +35,20 @@ Star.UI.renderPostItem = function ($elem, puff) {
   var ups = Star.G.v(puff.sig).in('upvote').run()
   var downs = Star.G.v(puff.sig).in('downvote').run()
   var comments = Star.G.v(puff.sig).in('comment').run()
-  $top = Star.UI.into($elem, "div", ["row"])
-  $top.append("<span class=\"title col-md-8\">" + puff.payload.title + "</span>")
-  $top.append("<span class=\"mentions col-md-2\">" + comments.length + "</span>")
-  $top.append("<span class=\"votes col-md-2\"><span class=\"up\">" + ups.length + "</span><span class=\"down\">" + downs.length + "</span></span>")
-  $mid = Star.UI.into($elem, "div", ["row"])
-  console.log("RENDERING POST", puff.type, puff)
+  Star.UI.into($elem, "div", ["row", "top"])
+    .append("<span class=\"title col-md-8\">" + puff.payload.title + "</span>")
+    .append("<span class=\"mentions col-md-2\">" + comments.length + "</span>")
+    .append("<span class=\"votes col-md-2\"><span class=\"up\">" + ups.length + "</span>"
+	    + "<span class=\"down\">" + downs.length + "</span></span>")
   if (puff.payload.type == "post") {
-    console.log("RENDERIN BODY...")
-    $mid.append("<span class=\"content\">" + puff.payload.content + "</span>")
+    Star.UI.into($elem, "div", (comments.length > 0) ? ["row", "loud"] : ["row"])
+      .append("<span class=\"content\">" + puff.payload.content + "</span>")
   }
   if (comments.length > 0) {
-    Star.UI.renderCommentTree(Star.UI.into($mid, "span", ["comments-tree"]),
-			      comments.map(function (c) { return c.puff }),
-			      2)
+    Star.UI.renderCommentTree(
+      Star.UI.into(Star.UI.into($elem, "div", ["row"]), "span", ["comments-tree"]),
+      comments.map(function (c) { return c.puff }),
+      2)
   }
 }
 
