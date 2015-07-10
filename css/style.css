@@ -35,6 +35,10 @@
     border-radius: 10px 10px 0px 0px;
     font-weight: bold;
 }
+.post .top.row button {
+    margin-left: 5px;
+    float: right;
+}
 .post .title {}
 .post .mentions {}
 .post .votes {}
