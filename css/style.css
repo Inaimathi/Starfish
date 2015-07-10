@@ -35,9 +35,14 @@
     border-radius: 10px 10px 0px 0px;
     font-weight: bold;
 }
-.post .top.row button {
+.post .up, .post .down {
     margin-left: 5px;
     float: right;
+}
+.post .show-comments {
+    border-radius: 15px;
+    margin-left:  -15px;
+    font-family: mono;
 }
 .post .title {}
 .post .mentions {}

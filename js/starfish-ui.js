@@ -36,7 +36,9 @@ Star.UI.renderPostItem = function ($elem, puff) {
   var downs = Star.G.v(puff.sig).in('downvote').run()
   var comments = Star.G.v(puff.sig).in('comment').run()
   Star.UI.into($elem, "div", ["row", "top"])
-    .append("<span class=\"title col-md-6\">" + puff.payload.title + "</span>")
+    .append("<span class=\"title col-md-6\">"
+	    + "<button class=\"btn btn-xs show-comments\">[+]</button>"
+	    + puff.payload.title + "</span>")
     .append("<span class=\"mentions col-md-2\">" + comments.length + "</span>")
     .append("<span class=\"votes col-md-4\">"
 	    + "<button class=\"btn btn-danger btn-xs down\"><span class=\"glyphicon glyphicon-arrow-down\"></span>" + downs.length + "</button>"
