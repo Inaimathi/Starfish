@@ -9,20 +9,20 @@ Star.G = Dagoba.graph()
 Star.postsAndLinks = []
 
 Star.plot = function (type, puff) {
-  var id = Star.isVote(type) ? puff.username + type + puff.payload.target : puff.sig
+  var id = Star.isVote(type) ? (puff.username + type + puff.payload.target) : puff.sig
 
   if (!Star.G.findVertexById(id)) {
     var vertex = { _id: id, puff: puff }
     Star.G.addVertex(vertex)
-  }
+    if (puff.payload.target) {
+      Star.G.addEdge({ _in: puff.payload.target, _out: id, _label: type })
+    }
+  } 
 
   if (type == "post" || type == "link") {
     Star.postsAndLinks.push(id)
   }
 
-  if (puff.payload.target) {
-    Star.G.addEdge({ _in: puff.payload.target, _out: id, _label: type })
-  }
   return id
 }
 

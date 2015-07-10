@@ -16,6 +16,7 @@ function test () {
 
   Star.up(a)
   Star.up(a)
+  Star.down(a)
   Star.down(b)
   Star.up(c1)
   Star.up(c1)
