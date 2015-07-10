@@ -1,0 +1,33 @@
+#starfish {
+    background-image: url('http://i.imgur.com/DHHroH1.png');
+    background-size: contain;
+    background-position: 10% 10%;
+    background-repeat: no-repeat;
+}
+
+.page-title {
+    width: 100%;
+    text-align: center;
+}
+
+.posts-list {
+    width: 100%;
+    max-width: 600px;
+    margin: auto; 
+    background-color: rgba(255,255,255,0.9)
+}
+.posts-list .post {}
+
+.post {}
+.post title {}
+.post mentions {}
+.post .votes {}
+.post .votes .up {}
+.post .votes .down {}
+.post .content {}
+.post .comments-tree {}
+
+.comments-tree {}
+.comments-tree .comment {}
+
+.comment {}

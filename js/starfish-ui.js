@@ -35,13 +35,20 @@ Star.UI.renderPostItem = function ($elem, puff) {
   var ups = Star.G.v(puff.sig).in('upvote').run()
   var downs = Star.G.v(puff.sig).in('downvote').run()
   var comments = Star.G.v(puff.sig).in('comment').run()
-  $elem.append("<span class=\"votes\"><span class=\"up\">" + ups.length + "</span> | <span class=\"down\">" + downs.length + "</span></span>")
-  $elem.append("<span class=\"mentions\">" + comments.length + "</span>")
-  $elem.append("<span class=\"title\">" + puff.payload.title + "</span>")
+  $top = Star.UI.into($elem, "div", ["row"])
+  $top.append("<span class=\"title col-md-8\">" + puff.payload.title + "</span>")
+  $top.append("<span class=\"mentions col-md-2\">" + comments.length + "</span>")
+  $top.append("<span class=\"votes col-md-2\"><span class=\"up\">" + ups.length + "</span><span class=\"down\">" + downs.length + "</span></span>")
+  $mid = Star.UI.into($elem, "div", ["row"])
+  console.log("RENDERING POST", puff.type, puff)
+  if (puff.payload.type == "post") {
+    console.log("RENDERIN BODY...")
+    $mid.append("<span class=\"content\">" + puff.payload.content + "</span>")
+  }
   if (comments.length > 0) {
-    Star.UI.renderCommentTree(Star.UI.into($elem, "span", ["comments-tree"]), 
+    Star.UI.renderCommentTree(Star.UI.into($mid, "span", ["comments-tree"]),
 			      comments.map(function (c) { return c.puff }),
-			      5)
+			      2)
   }
 }
 
@@ -64,7 +71,7 @@ Star.UI.renderTreeComment = function ($elem, puff, depth) {
 				coms.map(function (c) { return c.puff }),
 				depth)
     } else {
-      var $more = Star.UI.into($elem, "button", ["more-button"])
+      var $more = Star.UI.into($elem, "button", ["more-button", "btn", "btn-xs", "btn-primary"])
       $more.text("Show responses...")
       $more.click(function () {
 	$more.remove()
@@ -74,7 +81,6 @@ Star.UI.renderTreeComment = function ($elem, puff, depth) {
       })
     }
   }
-  
 }
 
 Star.UI.renderCommentList = function ($elem, comments) {
@@ -87,5 +93,7 @@ Star.UI.renderCommentList = function ($elem, comments) {
 
 Star.UI.renderComment = function ($elem, puff) {
   $elem.empty()
-  $elem.html(puff.payload.content)
+  $elem.addClass("comment")
+  // TODO - markdown processing and sanitation
+  Star.UI.into($elem, "p").html(puff.payload.content)
 }
