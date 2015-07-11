@@ -1,9 +1,4 @@
-#starfish {
-    background-image: url('http://i.imgur.com/DHHroH1.png');
-    background-size: contain;
-    background-position: 10% 10%;
-    background-repeat: no-repeat;
-}
+#starfish {}
 
 #starfish .row {
     margin-left: 0px;
@@ -32,7 +27,7 @@
 .post .row { padding: 5px; }
 .post .top.row {
     background-color: #ddd;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px;
     font-weight: bold;
 }
 .post .up, .post .down {
@@ -54,7 +49,9 @@
 .post .mentions .glyphicon {
     margin-right: 5px;
 }
-.post .votes {}
+.post .votes {
+    text-align: right;
+}
 .post .votes .up {}
 .post .votes .down {}
 .post .content {
@@ -73,12 +70,16 @@
 .post.collapsed .show-comments .glyphicon-minus {
     display: none;
 }
-.post.collapsed .row {
+.post.collapsed .row.comments {
     display: none;
 }
 .post.collapsed .top.row {
-    border-radius: 10px;
     display: block;
+}
+
+.post.collapsed .row.loud {
+    border-radius: 0px 0px 10px 10px;
+    border: none;
 }
 
 .comments-tree {}

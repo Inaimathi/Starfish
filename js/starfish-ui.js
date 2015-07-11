@@ -32,34 +32,46 @@ Star.UI.renderPosts = function ($elem, postIds) {
 }
 
 Star.UI.renderPostItem = function ($elem, puff) {
-  var ups = Star.G.v(puff.sig).in('upvote').run()
-  var downs = Star.G.v(puff.sig).in('downvote').run()
   var comments = Star.G.v(puff.sig).in('comment').run()
   var title = puff.payload.title;
   if (Star.isType(puff, "link")) {
     title = "<a href=\"" + puff.payload.content + "\">" + title + "</a>";
   }
-  console.log("RENDERING PUFF", puff)
   Star.UI.into($elem, "div", ["row", "top"])
     .append("<span class=\"title col-md-6\">"
-	    + "<button class=\"btn btn-xs show-comments\" onclick=\"$(this).parents('.post').toggleClass('collapsed')\">"
+	    + "<button class=\"show-comments btn btn-xs\">"
 	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
 	    + title + "</span>")
     .append("<span class=\"mentions col-md-2\"><span class=\"glyphicon glyphicon-comment\"></span>" + comments.length + "</span>")
     .append("<span class=\"votes col-md-4\">"
-	    + "<button class=\"btn btn-danger btn-xs down\"><span class=\"glyphicon glyphicon-arrow-down\"></span>" + downs.length + "</button>"
-	    + "<button class=\"btn btn-success btn-xs up\"><span class=\"glyphicon glyphicon-arrow-up\"></span>" + ups.length + "</button>"
+	    + "<span class=\"score\">" + Star.Util.scoreOf(puff) + "</span>"
+	    + "<button class=\"down btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-arrow-down\"></span></button>"
+	    + "<button class=\"up btn btn-success btn-xs\"><span class=\"glyphicon glyphicon-arrow-up\"></span></button>"
 	    + "</span>")
   if (Star.isType(puff, "post")) {
-    Star.UI.into($elem, "div", (comments.length > 0) ? ["row", "loud"] : ["row"])
+    Star.UI.into($elem, "div", (comments.length > 0) ? ["row", "content", "loud"] : ["row", "content"])
       .append("<span class=\"content\">" + puff.payload.content + "</span>")
   }
   if (comments.length > 0) {
     Star.UI.renderCommentTree(
-      Star.UI.into(Star.UI.into($elem, "div", ["row"]), "span", ["comments-tree"]),
+      Star.UI.into(Star.UI.into($elem, "div", ["row", "comments"]), "span", ["comments-tree"]),
       comments.map(function (c) { return c.puff }),
-      2)
+      5)
   }
+  $elem.find(".show-comments").click(function () {
+    $elem.toggleClass("collapsed");
+  })
+  var $votes = $elem.find(".votes");
+  var $score = $votes.children(".score")
+  $votes.children(".up").click(function () {
+    Star.up(puff.sig);
+    $score.text(Star.Util.scoreOf(puff))
+  })
+  $votes.children(".down").click(function () {
+    Star.down(puff.sig);
+    $score.text(Star.Util.scoreOf(puff))
+  })
+  
 }
 
 Star.UI.renderCommentTree = function ($elem, comments, depth) {
