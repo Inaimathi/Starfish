@@ -27,7 +27,7 @@ Star.UI.renderPosts = function ($elem, postIds) {
   $elem.empty()
   postIds.map(function (id) {
     var puff = Star.G.findVertexById(id).puff
-    Star.UI.renderPostItem(Star.UI.into($elem, "div", ["post"]), puff)
+    Star.UI.renderPostItem(Star.UI.into($elem, "div", ["post", "collapsed"]), puff)
   })
 }
 
@@ -37,9 +37,9 @@ Star.UI.renderPostItem = function ($elem, puff) {
   var comments = Star.G.v(puff.sig).in('comment').run()
   Star.UI.into($elem, "div", ["row", "top"])
     .append("<span class=\"title col-md-6\">"
-	    + "<button class=\"btn btn-xs show-comments\">[+]</button>"
+	    + "<button class=\"btn btn-xs show-comments\" onclick=\"$(this).parents('.post').toggleClass('collapsed')\">[+]</button>"
 	    + puff.payload.title + "</span>")
-    .append("<span class=\"mentions col-md-2\">" + comments.length + "</span>")
+    .append("<span class=\"mentions col-md-2\"><span class=\"glyphicon glyphicon-comment\"></span>" + comments.length + "</span>")
     .append("<span class=\"votes col-md-4\">"
 	    + "<button class=\"btn btn-danger btn-xs down\"><span class=\"glyphicon glyphicon-arrow-down\"></span>" + downs.length + "</button>"
 	    + "<button class=\"btn btn-success btn-xs up\"><span class=\"glyphicon glyphicon-arrow-up\"></span>" + ups.length + "</button>"

@@ -45,7 +45,9 @@
     font-family: mono;
 }
 .post .title {}
-.post .mentions {}
+.post .mentions .glyphicon {
+    margin-right: 5px;
+}
 .post .votes {}
 .post .votes .up {}
 .post .votes .down {}
