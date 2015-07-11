@@ -44,6 +44,12 @@
     margin-left:  -15px;
     font-family: mono;
 }
+.post .show-comments .glyphicon-plus {
+    display: none;
+}
+.post .show-comments .glyphicon-minus {
+    display: block;
+}
 .post .title {}
 .post .mentions .glyphicon {
     margin-right: 5px;
@@ -60,6 +66,20 @@
     border-bottom: 2px solid #ccc;
 }
 .post .comments-tree {}
+
+.post.collapsed .show-comments .glyphicon-plus {
+    display: block;
+}
+.post.collapsed .show-comments .glyphicon-minus {
+    display: none;
+}
+.post.collapsed .row {
+    display: none;
+}
+.post.collapsed .top.row {
+    border-radius: 10px;
+    display: block;
+}
 
 .comments-tree {}
 .comments-tree ul {
