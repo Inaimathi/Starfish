@@ -30,6 +30,10 @@
     border-radius: 10px;
     font-weight: bold;
 }
+.post .row.content {
+    padding: 10px 5px;
+}
+
 .post .up, .post .down {
     margin-left: 5px;
     float: right;
@@ -39,6 +43,10 @@
     margin-left:  -15px;
     font-family: mono;
 }
+.post.ghost-town .show-comments {
+    display: none;
+}
+
 .post .show-comments .glyphicon-plus {
     display: none;
 }
@@ -59,7 +67,6 @@
     padding: 0px 15px;
 }
 .post .row.loud {
-    padding: 10px 5px;
     border-bottom: 2px solid #ccc;
 }
 .post .comments-tree {}

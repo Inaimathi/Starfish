@@ -37,6 +37,9 @@ Star.UI.renderPostItem = function ($elem, puff) {
   if (Star.isType(puff, "link")) {
     title = "<a href=\"" + puff.payload.content + "\">" + title + "</a>";
   }
+  if (comments.length == 0) {
+    $elem.addClass("ghost-town")
+  }
   Star.UI.into($elem, "div", ["row", "top"])
     .append("<span class=\"title col-md-6\">"
 	    + "<button class=\"show-comments btn btn-xs\">"
