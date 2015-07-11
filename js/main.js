@@ -14,10 +14,10 @@ function test () {
   var c6 = Star.commentOn(c5, "Check.")
   var c7 = Star.commentOn(a, "This is a second comment.")
 
-  Star.up(a)
-  Star.up(a)
+  Star.up(c)
+  Star.up(c)
+  Star.down(c)
   Star.down(a)
-  Star.down(b)
   Star.up(c1)
   Star.up(c1)
   Star.down(c2)

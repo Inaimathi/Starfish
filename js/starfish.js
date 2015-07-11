@@ -5,6 +5,10 @@ Star.isVote = function (tp) {
   return tp == "upvote" || tp == "downvote"
 }
 
+Star.isType = function (puff, type) {
+  return puff.payload.type == type;
+}
+
 Star.G = Dagoba.graph()
 Star.postsAndLinks = []
 
