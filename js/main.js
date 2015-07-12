@@ -27,5 +27,6 @@ function test () {
 }
 
 $(document).ready(function () {
+  Star.UI.renderNewPostForm($(".interface"));
   test()
 })
