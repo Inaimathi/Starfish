@@ -121,7 +121,7 @@ Star.UI.renderPostItem = function ($elem, puff) {
 
   if (Star.isType(puff, "post")) {
     Star.UI.into($elem, "div", (comments.length > 0) ? ["row", "content", "loud"] : ["row", "content"])
-      .append("<span class=\"content\">" + puff.payload.content + "</span>")
+      .append("<span class=\"content\">" + puff.payload.content + "</span>") // TODO - sanitize
   }
   
   Star.UI.renderReplyForm(Star.UI.into($elem, "div", ["row", "main-reply"]), puff, function () { 
@@ -185,5 +185,5 @@ Star.UI.renderComment = function ($elem, puff) {
 	    + "</span>")
   Star.UI.voteFor($info, puff).addClass("col-md-4");
   Star.UI.into($elem, "div", ["row", "comment-body"])
-    .append("<span class=\"col-md-12\">" + puff.payload.content + "</span>")
+    .append("<span class=\"col-md-12\">" + puff.payload.content + "</span>") // TODO - sanitize
 }
