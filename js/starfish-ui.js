@@ -65,7 +65,7 @@ Star.UI.renderReplyForm = function ($elem, puff, fn) {
       Star.UI.into($form, "button", ["btn", "btn-warning", "btn-sm"])
 	.text("Cancel")
 	.click(function () {
-	  Star.UI.renderReplyForm($form, puff, fn);
+	  Star.UI.renderReplyForm($elem, puff, fn);
 	})
     })
 }
