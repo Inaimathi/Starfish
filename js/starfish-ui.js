@@ -31,6 +31,26 @@ Star.UI.renderPosts = function ($elem, postIds) {
   })
 }
 
+Star.UI.voteFor = function ($elem, puff) {
+  $elem
+    .append("<span class=\"votes\">"
+	    + "<span class=\"score\">" + Star.Util.scoreOf(puff) + "</span>"
+	    + "<button class=\"down btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-arrow-down\"></span></button>"
+	    + "<button class=\"up btn btn-success btn-xs\"><span class=\"glyphicon glyphicon-arrow-up\"></span></button>"
+	    + "</span>")
+  var $votes = $elem.find(".votes");
+  var $score = $votes.children(".score")
+  $votes.children(".up").click(function () {
+    Star.up(puff.sig);
+    $score.text(Star.Util.scoreOf(puff))
+  })
+  $votes.children(".down").click(function () {
+    Star.down(puff.sig);
+    $score.text(Star.Util.scoreOf(puff))
+  })
+  return $votes
+}
+
 Star.UI.renderPostItem = function ($elem, puff) {
   var comments = Star.G.v(puff.sig).in('comment').run()
   var title = puff.payload.title;
@@ -40,17 +60,15 @@ Star.UI.renderPostItem = function ($elem, puff) {
   if (comments.length == 0) {
     $elem.addClass("ghost-town")
   }
-  Star.UI.into($elem, "div", ["row", "top"])
+  var $info = Star.UI.into($elem, "div", ["row", "top"])
     .append("<span class=\"title col-md-6\">"
 	    + "<button class=\"show-comments btn btn-xs\">"
 	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
 	    + title + "</span>")
     .append("<span class=\"mentions col-md-2\"><span class=\"glyphicon glyphicon-comment\"></span>" + comments.length + "</span>")
-    .append("<span class=\"votes col-md-4\">"
-	    + "<span class=\"score\">" + Star.Util.scoreOf(puff) + "</span>"
-	    + "<button class=\"down btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-arrow-down\"></span></button>"
-	    + "<button class=\"up btn btn-success btn-xs\"><span class=\"glyphicon glyphicon-arrow-up\"></span></button>"
-	    + "</span>")
+
+  Star.UI.voteFor($info, puff).addClass("col-md-4")
+
   if (Star.isType(puff, "post")) {
     Star.UI.into($elem, "div", (comments.length > 0) ? ["row", "content", "loud"] : ["row", "content"])
       .append("<span class=\"content\">" + puff.payload.content + "</span>")
@@ -64,17 +82,6 @@ Star.UI.renderPostItem = function ($elem, puff) {
   $elem.find(".show-comments").click(function () {
     $elem.toggleClass("collapsed");
   })
-  var $votes = $elem.find(".votes");
-  var $score = $votes.children(".score")
-  $votes.children(".up").click(function () {
-    Star.up(puff.sig);
-    $score.text(Star.Util.scoreOf(puff))
-  })
-  $votes.children(".down").click(function () {
-    Star.down(puff.sig);
-    $score.text(Star.Util.scoreOf(puff))
-  })
-  
 }
 
 Star.UI.renderCommentTree = function ($elem, comments, depth) {
@@ -82,7 +89,7 @@ Star.UI.renderCommentTree = function ($elem, comments, depth) {
     $elem.empty()
     var $ul = Star.UI.into($elem, "ul")
     comments.map(function (c) {
-      Star.UI.renderTreeComment(Star.UI.into($ul, "li"), c, depth-1)
+      Star.UI.renderTreeComment(Star.UI.into($ul, "li", ["comment"]), c, depth-1)
     })
   }
 }
@@ -108,17 +115,15 @@ Star.UI.renderTreeComment = function ($elem, puff, depth) {
   }
 }
 
-Star.UI.renderCommentList = function ($elem, comments) {
-  $elem.empty()
-  var $ul = Star.UI.into($elem, "ul")
-  comments.map(function (c){
-    Star.UI.renderComment(Star.UI.into($ul, "li"), c)
-  })
-}
-
 Star.UI.renderComment = function ($elem, puff) {
   $elem.empty()
-  $elem.addClass("comment")
-  // TODO - markdown processing and sanitation
-  Star.UI.into($elem, "p").html(puff.payload.content)
+  var $info = Star.UI.into($elem, "div", ["row", "comment-info"])
+    .append("<span class=\"col-md-8\">"
+	    + "<button class=\"show-replies btn btn-xs\">"
+	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
+	    + puff.username.split(":")[0] // TODO - sanitize
+	    + "</span>")
+  Star.UI.voteFor($info, puff).addClass("col-md-4");
+  Star.UI.into($elem, "div", ["row", "comment-body"])
+    .append("<span class=\"col-md-12\">" + puff.payload.content + "</span>")
 }
