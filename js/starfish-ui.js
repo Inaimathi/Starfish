@@ -59,7 +59,6 @@ Star.UI.renderReplyForm = function ($elem, puff, fn) {
 	.text("Submit")
 	.click(function () {
 	  Star.commentOn(puff.sig, $body.val())
-	  console.log("COMMENTING ON", puff.sig, $body.val())
 	  if (fn) { fn() };
 	})
       Star.UI.into($form, "button", ["btn", "btn-warning", "btn-sm"])
@@ -67,6 +66,7 @@ Star.UI.renderReplyForm = function ($elem, puff, fn) {
 	.click(function () {
 	  Star.UI.renderReplyForm($elem, puff, fn);
 	})
+      $body.focus();
     })
 }
 
@@ -133,7 +133,7 @@ Star.UI.renderPostItem = function ($elem, puff) {
     Star.UI.renderCommentTree(
       Star.UI.into(Star.UI.into($elem, "div", ["row", "comments"]), "span", ["comments-tree"]),
       comments.map(function (c) { return c.puff }),
-      5)
+      Star.Options.contentDepth)
   }
   $elem.find(".show-comments").click(function () {
     $elem.toggleClass("collapsed");

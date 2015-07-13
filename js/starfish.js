@@ -1,40 +1,59 @@
 Star = {}
 
 Star.V = 0
-Star.isVote = function (tp) {
-  return tp == "upvote" || tp == "downvote"
+Star.G = Dagoba.graph()
+Star.postsAndLinks = []
+
+Star.Options = {
+  contentDepth: 5
 }
 
 Star.isType = function (puff, type) {
   return puff.payload.type == type;
 }
+Star.isVote = function (puff) {
+  return Star.isType(puff, "upvote") || Star.isType(puff, "downvote")
+}
 
-Star.G = Dagoba.graph()
-Star.postsAndLinks = []
-
-Star.plot = function (type, puff) {
-  var id = Star.isVote(type) ? (puff.username + type + puff.payload.target) : puff.sig
+Star.plot = function (puff) {
+  var type = puff.payload.type;
+  var target = puff.payload.target;
+  var id = Star.isVote(puff) ? (puff.username + type + target) : puff.sig
 
   if (!Star.G.findVertexById(id)) {
     var vertex = { _id: id, puff: puff }
     Star.G.addVertex(vertex)
-    if (puff.payload.target) {
-      Star.G.addEdge({ _in: puff.payload.target, _out: id, _label: type })
+    if (target) {
+      Star.G.addEdge({ _in: target, _out: id, _label: type })
     }
   } 
 
   if (type == "post" || type == "link") {
     Star.postsAndLinks.push(id)
   }
-
   return id
+}
+
+Star.inhale = function () {
+  // Inefficient version for now.
+  // REALLY, what we want is
+  // - Only pull puffs of type "upvote"/"downvote"/"comment"/"post"/"link"
+  // - Only pour new ones into Star.G
+  //
+  //   Ideally, this would happen in a stream-wise fashion, with a constant
+  // flow of new puffs coming in. For now, we're just calling the
+  // importRemoteShells function (no filters, since it doesn't support them
+  // yet), and updating synchronously.
+
+  EB.Data.importRemoteShells();
+  EB.Data.getCurrentDecryptedLetters().map(Star.plot)
 }
 
 Star.exhale = function (type, body, props) {
   var puff = EB.Puff.simpleBuild(type, body, props)
   var vertex = { _id: puff.sig, type: type, puff: puff }
   EB.Data.addPuffToSystem(puff)
-  return Star.plot(type, puff)
+  return Star.plot(puff)
 }
 
 Star.newPost = function (title, body, tags) {
