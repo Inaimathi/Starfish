@@ -183,7 +183,10 @@ Star.UI.renderComment = function ($elem, puff) {
 	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
 	    + puff.username.split(":")[0] // TODO - sanitize
 	    + "</span>")
-  Star.UI.voteFor($info, puff).addClass("col-md-4");
+  Star.UI.voteFor($info, puff).addClass("col-md-4").addClass("reply");
   Star.UI.into($elem, "div", ["row", "comment-body"])
     .append("<span class=\"col-md-12\">" + puff.payload.content + "</span>") // TODO - sanitize
+  $info.find(".show-replies").click(function () {
+    $elem.toggleClass("collapsed");
+  })
 }

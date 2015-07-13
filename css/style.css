@@ -128,6 +128,20 @@
     padding: 0px
 }
 
+.comments-tree .comment .show-replies .glyphicon-plus {
+    display: none;
+}
+
+.comments-tree .comment.collapsed .show-replies .glyphicon-plus {
+    display: block;
+}
+.comments-tree .comment.collapsed .show-replies .glyphicon-minus,
+.comments-tree .comment.collapsed ul, 
+.comments-tree .comment.collapsed .comment-body,
+.comments-tree .comment.collapsed .reply {
+    display: none;
+}
+
 .comment {}
 
 /* Reply forms */
