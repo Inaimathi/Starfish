@@ -144,6 +144,13 @@
 
 .comment {}
 
+.post .author, .comment .author {
+    font-weight: normal;
+    font-style: oblique;
+    font-size: x-small;
+    margin-left: 3px;
+}
+
 /* Reply forms */
 .reply-form {
     padding: 5px 15px;

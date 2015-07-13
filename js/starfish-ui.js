@@ -114,7 +114,9 @@ Star.UI.renderPostItem = function ($elem, puff) {
     .append("<span class=\"title col-md-6\">"
 	    + "<button class=\"show-comments btn btn-xs\">"
 	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
-	    + title + "</span>")
+	    + title
+	    + "<span class=\"author\">" + puff.username.split(":")[0] + "</span>"
+	    + "</span>")
     .append("<span class=\"mentions col-md-2\"><span class=\"glyphicon glyphicon-comment\"></span>" + comments.length + "</span>")
 
   Star.UI.voteFor($info, puff).addClass("col-md-4")
@@ -181,7 +183,7 @@ Star.UI.renderComment = function ($elem, puff) {
     .append("<span class=\"col-md-8\">"
 	    + "<button class=\"show-replies btn btn-xs\">"
 	    + "<span class=\"glyphicon glyphicon-plus\"></span><span class=\"glyphicon glyphicon-minus\"></span></button>"
-	    + puff.username.split(":")[0] // TODO - sanitize
+	    + "<span class=\"author\">" + puff.username.split(":")[0] + "</span>" // TODO - sanitize
 	    + "</span>")
   Star.UI.voteFor($info, puff).addClass("col-md-4").addClass("reply");
   Star.UI.into($elem, "div", ["row", "comment-body"])

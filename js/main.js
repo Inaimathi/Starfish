@@ -23,10 +23,11 @@ function test () {
   Star.down(c2)
   Star.up(c5)
   Star.down(c5)
-  Star.UI.renderPosts($(".posts-list"), Star.postsAndLinks)
 }
 
 $(document).ready(function () {
   Star.UI.renderNewPostForm($(".interface"));
-  test()
+  Star.inhale;
+  //  test();
+  Star.UI.renderPosts($(".posts-list"), Star.postsAndLinks);
 })
