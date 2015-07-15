@@ -44,9 +44,16 @@ Think of it like reddit meets BitTorrent, or "Doge for Discussion".<sup>[1](#foo
 
 ##Additional thoughts and random ideas
 
-**Karma grows up and becomes a currency unto itself.** All community systems use some version of karma to reward good behavior. What if karma in this system became a full-fledged currency, one that could be transferred or exchanged for perks like the ability to create a new community? **Note**: Getting this right could be **extremely tricky**.
+**Karma grows up and becomes a currency unto itself.**  
+All community systems use some version of karma to reward good behavior. What if karma in this system became a full-fledged currency, one that could be transferred or exchanged for perks like the ability to create a new community? **Note**: Getting this right could be **extremely tricky**. 
 
  - Careful here. "Karma" is useful pretty much to the extent that it *isn't* transferable, because once it *is*, you'll likely see the same imbalances you see in government-backed economies (rich-get-richer, inheritances, and so forth). Unless you believe that the richest people in the world are the most trustworthy, this doesn't sound like the right way to go. Limited transferability doesn't seem to have hurt `stackoverflow`, but it seems like it might be a gameable system in the long term. *-Inaimathi*
+
+**Karma can be computed in many different ways.** 
+Imagine that individual communities (or even users) can pick their own ratings mechanism. In this decentalized system, everyone would get to see the upvotes of everyone else (for public communities). A user convert that voting information into a simple ups vs downs points system, or filter content according to a more sophisticated system that used a page-rank like algorithm, weighting the upvotes of high karma individuals more than low karma individuals.
+
+**The back end should lock in a protocol, not a language.** 
+A natural choice for the JS driven front end might be Node, but there's no reason not to consider Erlang, Go, Nim, or others. So long as the back end is able to persist content and handle requests, there could be multiple implementations of the server side code.
 
 <a name="footnotes"></a>
 ##Footnotes
