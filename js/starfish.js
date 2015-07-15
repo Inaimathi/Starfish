@@ -8,15 +8,25 @@ Star.Options = {
   contentDepth: 5
 }
 
+Star.prefix = "starfish.v" + Star.V + "."
+Star.typeOf = function (puff) {
+  return puff.payload.type.replace(Star.prefix, "")
+}
 Star.isType = function (puff, type) {
-  return puff.payload.type == type;
+  return Star.typeOf(puff) == type;
 }
 Star.isVote = function (puff) {
   return Star.isType(puff, "upvote") || Star.isType(puff, "downvote")
 }
+Star.isPost = function (puff) {
+  return Star.isType(puff, "post") || Star.isType(puff, "link")
+}
+Star.buildPuff = function (type, body, props) {
+  return EB.Puff.simpleBuild(Star.prefix + type, body, props);
+}
 
 Star.plot = function (puff) {
-  var type = puff.payload.type;
+  var type = Star.typeOf(puff);
   var target = puff.payload.target;
   var id = Star.isVote(puff) ? (puff.username + type + target) : puff.sig
 
@@ -26,9 +36,9 @@ Star.plot = function (puff) {
     if (target) {
       Star.G.addEdge({ _in: target, _out: id, _label: type })
     }
-  } 
+  }
 
-  if (type == "post" || type == "link") {
+  if (Star.isPost(puff)) {
     Star.postsAndLinks.push(id)
   }
   return id
@@ -50,7 +60,7 @@ Star.inhale = function () {
 }
 
 Star.exhale = function (type, body, props) {
-  var puff = EB.Puff.simpleBuild(type, body, props)
+  var puff = Star.buildPuff(type, body, props)
   var vertex = { _id: puff.sig, type: type, puff: puff }
   EB.Data.addPuffToSystem(puff)
   return Star.plot(puff)
