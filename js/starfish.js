@@ -44,21 +44,6 @@ Star.plot = function (puff) {
   return id
 }
 
-Star.inhale = function () {
-  // Inefficient version for now.
-  // REALLY, what we want is
-  // - Only pull puffs of type "upvote"/"downvote"/"comment"/"post"/"link"
-  // - Only pour new ones into Star.G
-  //
-  //   Ideally, this would happen in a stream-wise fashion, with a constant
-  // flow of new puffs coming in. For now, we're just calling the
-  // importRemoteShells function (no filters, since it doesn't support them
-  // yet), and updating synchronously.
-
-  EB.Data.importRemoteShells();
-  EB.Data.getCurrentDecryptedLetters().map(Star.plot)
-}
-
 Star.exhale = function (type, body, props) {
   var puff = Star.buildPuff(type, body, props)
   var vertex = { _id: puff.sig, type: type, puff: puff }
